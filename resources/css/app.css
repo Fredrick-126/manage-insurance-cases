@@ -1,3 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base.css";
+@import "tailwindcss/components.css";
+@import "tailwindcss/utilities.css";
+
+@import "vue-multiselect/dist/vue-multiselect.css";
+@import "./custom.css";
+
+@layer base {
+  :root {
+    --color-background: #e8e8e8;
+    --color-item-background: #BAEBDF;
+    --color-primary: #54C0A5;
+    --color-disable: #d9d9d9;
+    --color-placeholder: #c4c4c4;
+    --color-main: #1F3040;
+    --color-sub: #637383;
+    --color-control: rgba(0, 0, 0, 0.05);
+    --height-header: 10vh;
+    --height-progress: 10px;
+  }
+}

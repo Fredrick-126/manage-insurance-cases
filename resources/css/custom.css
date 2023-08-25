@@ -1,0 +1,33 @@
+html, body {
+  @apply bg-body overflow-x-hidden
+}
+
+html, body {
+  color: var(--color-main);
+}
+
+.list-decimal {
+  list-style: decimal;
+}
+
+.progressbar {
+  transition: width 0.5s ease;
+}
+
+.left-align {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--color-placeholder);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--color-placeholder);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--color-placeholder);
+}

@@ -1,0 +1,61 @@
+.multiselect {
+  font-family: Inter, sans-serif;
+  display: block;
+}
+
+.multiselect * {
+  @apply font-inter
+}
+
+.multiselect .multiselect__tags {
+  padding: 0 40px 0 8px;
+
+  @apply border-0 flex items-center
+}
+
+.multiselect .multiselect__tags .multiselect__placeholder {
+  @apply mb-0 pt-0 w-full;
+}
+
+.multiselect .multiselect__tags .multiselect__input, .multiselect .multiselect__tags .multiselect__single {
+  line-height: 1.5rem;
+  min-height: 40px;
+
+  @apply flex items-center border-0 mb-0 outline-0 focus:ring-0 focus:ring-offset-0;
+}
+
+.multiselect .multiselect__content-wrapper {
+  @apply border-0 shadow-control
+}
+
+.multiselect .multiselect__content-wrapper .multiselect__content .multiselect__element .multiselect__option--highlight {
+  @apply bg-disable
+}
+
+.multiselect .multiselect__select {
+  @apply h-full top-0 flex justify-center items-center
+}
+
+.multiselect .multiselect__select:before {
+  top: -1px;
+}
+
+.multiselect .multiselect__tags .multiselect__placeholder {
+  color: var(--color-placeholder);
+  opacity: 1;
+  font-size: 16px;
+  padding: 0 5px;
+}
+
+.multiselect ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--color-placeholder);
+  opacity: 1; /* Firefox */
+}
+
+.multiselect :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--color-placeholder);
+}
+
+.multiselect ::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--color-placeholder);
+}
