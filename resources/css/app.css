@@ -15,7 +15,7 @@
     --color-main: #1F3040;
     --color-sub: #637383;
     --color-control: rgba(0, 0, 0, 0.05);
-    --height-header: 10vh;
+    --height-header: 65px;
     --height-progress: 10px;
   }
 }

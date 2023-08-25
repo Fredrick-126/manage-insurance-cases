@@ -51,10 +51,11 @@ export default {
         'form-group': '24px 26px',
       },
       height: {
-        header: '10vh',
+        nav: '65px',
+        header: '73px',
         button: '40px',
         progress: '10px',
-        container: 'calc(100vh - var(--height-header) - var(--height-progress) - 20px)',
+        container: 'calc(100vh - var(--height-header) - 20px)',
       },
       listStyleType: {
         decimal: 'decimal',

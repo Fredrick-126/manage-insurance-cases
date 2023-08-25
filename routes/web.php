@@ -16,11 +16,11 @@ use Inertia\Inertia;
 */
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('Welcome', [
+        return Inertia::render('Dashboard', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register')
         ]);
-    });
+    })->middleware(['auth', 'verified'])->name('welcome');
 
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');

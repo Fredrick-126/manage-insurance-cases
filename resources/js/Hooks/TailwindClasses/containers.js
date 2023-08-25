@@ -1,7 +1,4 @@
 export default function () {
-  const jaseHeader
-    = 'bg-white flex items-center self-center justify-center m-0 pt-4 flex-wrap w-full border-0 min-h-[75px] h-header'
-
   const mainContainer = 'overflow-x-hidden'
   const mainContent = 'relative w-full overflow-hidden h-container'
 
@@ -20,7 +17,6 @@ export default function () {
     = 'bg-gray-400 opacity-50 absolute p-0 left-0 top-0 m-0 w-full h-screen overflow-hidden z-10'
 
   return {
-    jaseHeader,
     mainContainer,
     mainContent,
     pageContainer,
