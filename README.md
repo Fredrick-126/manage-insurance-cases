@@ -13,11 +13,11 @@ before starting installation.
 - `> npm install`
 
 ### Configuration .env file
-Make the `.env` file if not exists and then edit environment variables in the `.env` file 
+#### Make the `.env` file if not exists and then edit environment variables in the `.env` file 
 - `> cp .env.example .env`
 
 ### Database migration
-Before doing migration, DB should be created first in the mysql. 
+#### Before doing migration, DB should be created first in the mysql. 
 - `> mysql -u username -p password`
 - `mysql > create database manage_insurance_cases;`
 #### After creating DB, execute php artisan commands:
