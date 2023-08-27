@@ -75,7 +75,9 @@ class InsuranceCaseRepository extends Repository implements IInsuranceCase
     {
         $el->car_make = $el->carMake()->first();
         $el->car_model = $el->carModel()->first();
-        $el->picture_url = asset('storage/' . config('services.site.picture_folder') . "/" . auth()->user()->id . '/' . $el->picture_name);
+        $el->picture_url = $el->picture_name
+            ? asset('storage/' . config('services.site.picture_folder') . "/" . auth()->user()->id . '/' . $el->picture_name)
+            : null;
 
         return $el;
     }
@@ -89,6 +91,10 @@ class InsuranceCaseRepository extends Repository implements IInsuranceCase
      */
     public function save($data, $insuranceCase): InsuranceCase
     {
+        if (empty($data['bought_at'])) {
+            $data['bought_at'] = date('Y-m-d');
+        }
+
         $insuranceCase->fill($data);
 
         $insuranceCase->user_id = auth()->user()->id;

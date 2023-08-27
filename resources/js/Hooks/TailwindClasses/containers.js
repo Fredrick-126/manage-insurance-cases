@@ -8,12 +8,12 @@ export default function () {
     = 'max-w-7xl mx-auto sm:px-6 lg:px-8 py-1 sm:py-6 md:py-12'
 
   const pageContent
-    = 'bg-white overflow-hidden shadow-sm sm:rounded-lg'
+    = 'overflow-hidden relative min-h-container'
 
   const pageContentCard
-    = 'p-6 text-gray-900'
+    = 'p-6 text-gray-900 overflow-auto'
 
-  const buttonWrapper = 'px-1 w-full flex justify-center'
+  const buttonWrapper = 'px-1 w-full flex justify-center items-center'
 
   const modalContainer
     = 'fixed top-0 left-0 m-0 px-2 w-full h-screen overflow-hidden z-[999999] items-center justify-center'

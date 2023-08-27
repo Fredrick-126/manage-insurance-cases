@@ -11,7 +11,7 @@ class InsuranceCase extends Model
     use HasFactory;
 
     protected $fillable = [
-        'case', 'car_make_id', 'car_model_id', 'mileage', 'bought_at', 'color', 'drivetrain', 'picture_name'
+        'case', 'car_make_id', 'car_model_id', 'mileage', 'bought_at', 'color', 'drivetrain', 'picture_name', 'status'
     ];
 
     /**

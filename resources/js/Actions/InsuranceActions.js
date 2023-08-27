@@ -21,6 +21,7 @@ export async function addInsuranceCase(form) {
         drivetrain: form.drivetrain,
         picture_name: form.picture_name,
         picture_image: form.picture_image,
+        status: form.status,
       })
       .then(data => {
         resolve(data)
@@ -42,14 +43,15 @@ export async function updateInsuranceCase(form) {
     axiosService
       .update('insurance-cases', form.id, {
         case: form.case,
-        car_make_id: form.car_make_id,
-        car_model_id: form.car_model_id,
+        car_make_id: form.car_make.id,
+        car_model_id: form.car_model.id,
         mileage: form.mileage,
-        bought_at: form.bought_at,
+        bought_at: form.boughtAt,
         color: form.color,
         drivetrain: form.drivetrain,
-        picture_name: form.picture_name,
-        picture_image: form.picture_image,
+        picture_name: form.pictureName,
+        picture_image: form.pictureImage,
+        status: form.status,
       })
       .then(data => {
         resolve(data)

@@ -17,12 +17,14 @@ class InsuranceCaseCollection extends ResourceCollection
         return [
             'list' => $this->collection->map(fn($el) => [
                 'id'           => $el->id,
-                'bought_at'    => date('M j, Y h:i A', strtotime($el->bought_at)),
+                'bought_at'    => date('Y-m-d', strtotime($el->bought_at)),
                 'case'         => $el->case,
                 'color'        => $el->color,
                 'drivetrain'   => $el->drivetrain,
                 'status'       => $el->status,
-                'picture_url'  => asset('storage/' . config('services.site.picture_folder') . "/" . auth()->user()->id . '/' . $el->picture_name),
+                'picture_url'  => $el->picture_name ?
+                    asset('storage/' . config('services.site.picture_folder') . "/" . auth()->user()->id . '/' . $el->picture_name) :
+                    null,
                 'picture_name' => $el->picture_name,
                 'user_id'      => $el->user_id,
                 'mileage'      => number_format($el->mileage),
@@ -30,7 +32,9 @@ class InsuranceCaseCollection extends ResourceCollection
                 'make_id'      => $el->car_make_id,
                 'make_name'    => $el->carMake->name,
                 'model_id'     => $el->car_model_id,
-                'models_name'   => $el->carModel->model_name,
+                'models_name'  => $el->carModel->model_name,
+                'car_make'     => $el->carMake,
+                'car_model'    => $el->carModel,
             ])
         ];
     }

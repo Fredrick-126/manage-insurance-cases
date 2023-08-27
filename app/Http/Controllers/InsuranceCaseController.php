@@ -27,8 +27,9 @@ class InsuranceCaseController extends Controller
         $data = $this->service->list($request, $request->user()->id);
 
         return Inertia::render('Dashboard', [
-            'data' => new InsuranceCaseCollection($data),
-            'cars' => $this->service->carsList()
+            'data'            => new InsuranceCaseCollection($data),
+            'cars'            => $this->service->carsList(),
+            'max_mileage_val' => config('services.site.max_mileage_val')
         ]);
     }
 

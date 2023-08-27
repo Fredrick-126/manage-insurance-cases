@@ -23,9 +23,6 @@ export default function () {
   const formCheckbox
     = 'rounded-full w-[16px] h-[16px] focus:ring-1 focus:ring-offset-1 focus:ring-main border-none text-main !bg-none checked:ring-1 checked:ring-offset-1 checked:ring-main disabled:bg-disable disabled:ring-disable hover:ring-1 hover:ring-offset-1 hover:ring-main'
 
-  const formCheckboxNotDisable   = ' disabled:ring-1 disabled:ring-black disabled:bg-black'
-  const formCheckboxNotChecked = '!bg-white !ring-disable'
-
   // Buttons
   const button
     = 'block w-full h-button bg-primary text-button font-semibold text-white scale-100 active:scale-95 disabled:scale-100 disabled:cursor-not-allowed disabled:bg-disable flex justify-center items-center'
@@ -58,8 +55,6 @@ export default function () {
     formControlError,
     formCheckboxWrapper,
     formCheckbox,
-    formCheckboxNotDisable,
-    formCheckboxNotChecked,
     mainInput,
     button,
     outlineButton,

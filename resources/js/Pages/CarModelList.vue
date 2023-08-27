@@ -131,12 +131,12 @@ function confirmDelete(confirm) {
                 <th :class="[tableCol]" />
               </tr>
             </thead>
-            <tbody v-if="carModelList">
+            <tbody v-if="!!carModelList && carModelList.length">
               <template
                 v-for="(carModel, m) in carModelList"
                 :key="m"
               >
-                <tr>
+                <tr class="bg-white">
                   <td :class="[tableCol]">
                     {{ m + 1 }}
                   </td>
@@ -158,6 +158,17 @@ function confirmDelete(confirm) {
                   </td>
                 </tr>
               </template>
+            </tbody>
+            <tbody v-else>
+              <tr class="bg-white">
+                <td
+                  :class="[tableCol]"
+                  class="text-center"
+                  colspan="4"
+                >
+                  No data exists
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

@@ -55,7 +55,7 @@ export default {
         header: '73px',
         button: '40px',
         progress: '10px',
-        container: 'calc(100vh - var(--height-header) - 20px)',
+        container: 'calc(100vh - var(--height-header) - 100px)',
       },
       listStyleType: {
         decimal: 'decimal',
@@ -67,7 +67,7 @@ export default {
       minHeight: {
         input: '40px',
         button: '40px',
-        container: 'calc(100vh - var(--height-header) - 50px)',
+        container: 'calc(100vh - var(--height-header) - 200px)',
       },
       transitionDuration: {
         350: '350ms',

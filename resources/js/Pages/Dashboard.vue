@@ -6,7 +6,7 @@ import useStyledContainers from '@/Hooks/TailwindClasses/containers'
 import useTheme from '@/Hooks/theme'
 import { CustomPlus } from '@/Components/Icons/'
 import { ButtonDelete, ButtonEdit, ButtonNext } from '@/Components/Buttons'
-import { ConfirmPopup, EditMake } from '@/Components/Pages'
+import { ConfirmPopup, EditInsuranceCase } from '@/Components/Pages'
 import { deleteInsuranceCase } from '@/Actions'
 
 const { cars, data, errors } = defineProps([
@@ -26,7 +26,7 @@ const {
 
 const { platformName } = useTheme()
 
-const showAddModal = ref(false)
+const showEditPage = ref(false)
 const insuranceCaseList = ref(data?.data?.list || [])
 const showConfirmModal = ref(false)
 const deleteId = ref()
@@ -34,17 +34,26 @@ const deleteId = ref()
 const form = ref({
   data: {
     id: null,
+    case: '',
+    car_make: null,
+    car_model: null,
+    mileage: null,
+    boughtAt: null,
+    color: null,
+    drivetrain: null,
+    pictureName: null,
+    pictureImage: null,
+    pictureUrl: null,
+    status: 'draft',
     errorMessage: null,
-    nameError: null,
-    makeName: null,
   },
 })
 
-function toggleAddModal(flag = false) {
-  showAddModal.value = flag
+function showEditModal(flag = false) {
+  showEditPage.value = flag
 }
 
-function updateCaseList(list, flag) {
+function updateCaseList({ list, flag }) {
   if (flag === 'update') {
     const selectedIndex = insuranceCaseList.value.findIndex(el => el.id === list.id)
 
@@ -63,12 +72,21 @@ function updateCaseList(list, flag) {
 function setFormData(item) {
   form.value.data = {
     id: item.id,
-    makeName: item.name,
+    case: item.case,
+    car_make: item.car_make,
+    car_model: item.car_model,
+    mileage: item.mileage,
+    boughtAt: item.bought_at,
+    color: item.color,
+    drivetrain: item.drivetrain,
+    pictureName: item.picture_name,
+    pictureImage: null,
+    pictureUrl: item.picture_url,
+    status: item.status,
     errorMessage: null,
-    nameError: null,
   }
 
-  toggleAddModal(true)
+  showEditModal(true)
 }
 
 function handleDelete(id) {
@@ -82,7 +100,7 @@ function confirmDelete(confirm) {
       showConfirmModal.value = false
 
       if (re.status === 'success')
-        updateCaseList(null, 'delete')
+        updateCaseList({ list: null, flag: 'delete' })
     }).catch(e => {
       showConfirmModal.value = false
     })
@@ -130,6 +148,9 @@ function confirmDelete(confirm) {
                   No
                 </th>
                 <th :class="[tableCol]">
+                  Picture
+                </th>
+                <th :class="[tableCol]">
                   Case
                 </th>
                 <th :class="[tableCol]">
@@ -144,32 +165,46 @@ function confirmDelete(confirm) {
                 <th :class="[tableCol]">
                   Buying Date
                 </th>
+                <th :class="[tableCol]">
+                  Status
+                </th>
                 <th :class="[tableCol]" />
               </tr>
             </thead>
-            <tbody v-if="insuranceCaseList">
+            <tbody v-if="!!insuranceCaseList && insuranceCaseList.length">
               <template
                 v-for="(insurance, m) in insuranceCaseList"
                 :key="m"
               >
-                <tr>
+                <tr class="bg-white">
                   <td :class="[tableCol]">
                     {{ m + 1 }}
+                  </td>
+                  <td :class="[tableCol]">
+                    <img
+                      v-if="insurance.picture_url"
+                      :src="insurance.picture_url"
+                      alt=""
+                      class="w-full max-w-[100px] h-auto rounded"
+                    >
                   </td>
                   <td :class="[tableCol]">
                     {{ insurance.case }}
                   </td>
                   <td :class="[tableCol]">
-                    {{ insurance.make_name }}
+                    {{ insurance.car_make?.name || '' }}
                   </td>
                   <td :class="[tableCol]">
-                    {{ insurance.models_name }}
+                    {{ insurance.car_model?.model_name || '' }}
                   </td>
                   <td :class="[tableCol]">
                     {{ insurance.mileage }}
                   </td>
                   <td :class="[tableCol]">
                     {{ insurance.bought_at }}
+                  </td>
+                  <td :class="[tableCol]">
+                    {{ insurance.status }}
                   </td>
                   <td :class="[tableCol]">
                     <div class="flex items-center gap-x-2">
@@ -184,17 +219,29 @@ function confirmDelete(confirm) {
                 </tr>
               </template>
             </tbody>
+            <tbody v-else>
+              <tr class="bg-white">
+                <td
+                  :class="[tableCol]"
+                  class="text-center"
+                  colspan="9"
+                >
+                  No data exists
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
+        <EditInsuranceCase
+          v-model:show-edit-page="showEditPage"
+          v-model:form="form"
+          :cars="cars"
+          :platform="platformName"
+          @close="showEditModal"
+          @update="updateCaseList"
+        />
       </div>
     </div>
-    <EditMake
-      v-model:show-add-modal="showAddModal"
-      v-model:form="form"
-      :platform="platformName"
-      @close="toggleAddModal"
-      @update="updateCaseList"
-    />
     <ConfirmPopup
       v-model:show-confirm-popup="showConfirmModal"
       :platform="platformName"
