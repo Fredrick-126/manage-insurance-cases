@@ -1,10 +1,10 @@
 .multiselect {
-  font-family: Inter, sans-serif;
+  font-family: Figtree, sans-serif;
   display: block;
 }
 
 .multiselect * {
-  @apply font-inter
+  @apply font-sans
 }
 
 .multiselect .multiselect__tags {

@@ -1,6 +1,7 @@
 import ButtonContinue from './ButtonContinue.vue'
 import ButtonDefault from './ButtonDefault.vue'
 import ButtonDelete from './ButtonDelete.vue'
+import ButtonEdit from './ButtonEdit.vue'
 import ButtonHoverCircle from './ButtonHoverCircle.vue'
 import ButtonHoverWide from './ButtonHoverWide.vue'
 import ButtonNext from './ButtonNext.vue'
@@ -11,6 +12,7 @@ export {
   ButtonContinue,
   ButtonDefault,
   ButtonDelete,
+  ButtonEdit,
   ButtonHoverCircle,
   ButtonHoverWide,
   ButtonNext,

@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'site' => [
+        'max_mileage_val' => env('MAX_MILEAGE_VALUE', 100000),
+        'picture_folder' => env('PICTURE_FOLDER', 'pictures')
+    ]
 ];

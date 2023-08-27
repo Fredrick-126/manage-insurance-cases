@@ -1,6 +1,6 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
-import typography from '@tailwindcss/typography';
+import defaultTheme from 'tailwindcss/defaultTheme'
+import forms from '@tailwindcss/forms'
+import typography from '@tailwindcss/typography'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -67,6 +67,7 @@ export default {
       minHeight: {
         input: '40px',
         button: '40px',
+        container: 'calc(100vh - var(--height-header) - 50px)',
       },
       transitionDuration: {
         350: '350ms',

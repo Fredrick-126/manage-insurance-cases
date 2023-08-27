@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CarMakeController;
+use App\Http\Controllers\CarModelController;
+use App\Http\Controllers\InsuranceCaseController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,20 +17,27 @@ use Inertia\Inertia;
 |
 */
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('Dashboard', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register')
-        ]);
-    })->middleware(['auth', 'verified'])->name('welcome');
-
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/', [InsuranceCaseController::class, 'index'])
+        ->middleware(['auth', 'verified'])
+        ->name('welcome');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('insurance-cases', InsuranceCaseController::class)->names([
+        'index' => 'insurance-cases'
+    ]);
+    Route::post('insurance-cases/search', [InsuranceCaseController::class, 'search'])->name('insurance-cases.search');
+
+    Route::get('car-makes/search', [CarModelController::class, 'search'])->name('car-makes.search');
+    Route::apiResource('car-makes', CarMakeController::class)->names([
+        'index' => 'car-makes'
+    ]);
+
+    Route::apiResource('car-models', CarModelController::class)->names([
+        'index' => 'car-models'
+    ]);
 });
 
 require __DIR__.'/auth.php';

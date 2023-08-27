@@ -3,6 +3,7 @@ import CustomArrowBack from './CustomArrowBack.vue'
 import CustomButtonLoading from './CustomButtonLoading.vue'
 import CustomCheck from './CustomCheck.vue'
 import CustomLogo from './CustomLogo.vue'
+import CustomPencil from './CustomPencil.vue'
 import CustomPlus from './CustomPlus.vue'
 import CustomTrash from './CustomTrash.vue'
 
@@ -12,6 +13,7 @@ export {
   CustomButtonLoading,
   CustomCheck,
   CustomLogo,
+  CustomPencil,
   CustomPlus,
   CustomTrash,
 }

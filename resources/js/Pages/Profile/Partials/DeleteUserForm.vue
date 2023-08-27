@@ -21,6 +21,12 @@ const confirmUserDeletion = () => {
   nextTick(() => passwordInput.value.focus())
 }
 
+const closeModal = () => {
+  confirmingUserDeletion.value = false
+
+  form.reset()
+}
+
 const deleteUser = () => {
   form.delete(route('profile.destroy'), {
     preserveScroll: true,
@@ -28,12 +34,6 @@ const deleteUser = () => {
     onError: () => passwordInput.value.focus(),
     onFinish: () => form.reset(),
   })
-}
-
-const closeModal = () => {
-  confirmingUserDeletion.value = false
-
-  form.reset()
 }
 </script>
 

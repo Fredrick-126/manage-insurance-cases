@@ -6,12 +6,12 @@ import useStyledContainers from '@/Hooks/TailwindClasses/containers'
 import useTheme from '@/Hooks/theme'
 import { CustomPlus } from '@/Components/Icons/'
 import { ButtonDelete, ButtonEdit, ButtonNext } from '@/Components/Buttons'
-import { ConfirmPopup, EditMake } from '@/Components/Pages'
-import { deleteInsuranceCase } from '@/Actions'
+import { ConfirmPopup, EditModel } from '@/Components/Pages'
+import { deleteCarModel } from '@/Actions'
 
-const { cars, data, errors } = defineProps([
-  'cars',
+const { data, makes, errors } = defineProps([
   'data',
+  'makes',
   'errors',
 ])
 
@@ -27,7 +27,7 @@ const {
 const { platformName } = useTheme()
 
 const showAddModal = ref(false)
-const insuranceCaseList = ref(data?.data?.list || [])
+const carModelList = ref(data)
 const showConfirmModal = ref(false)
 const deleteId = ref()
 
@@ -36,7 +36,9 @@ const form = ref({
     id: null,
     errorMessage: null,
     nameError: null,
-    makeName: null,
+    makeIdError: null,
+    modelName: null,
+    carMake: null,
   },
 })
 
@@ -44,28 +46,18 @@ function toggleAddModal(flag = false) {
   showAddModal.value = flag
 }
 
-function updateCaseList(list, flag) {
-  if (flag === 'update') {
-    const selectedIndex = insuranceCaseList.value.findIndex(el => el.id === list.id)
-
-    insuranceCaseList.value[selectedIndex] = list
-  }
-  else if (flag === 'create') {
-    insuranceCaseList.value.push(list)
-  }
-  else {
-    const selectedIndex = insuranceCaseList.value.findIndex(el => el.id === deleteId.value)
-
-    insuranceCaseList.value.splice(selectedIndex, 1)
-  }
+function setCarModelList(list) {
+  carModelList.value = list
 }
 
 function setFormData(item) {
   form.value.data = {
     id: item.id,
-    makeName: item.name,
+    carMake: item.car_make,
+    modelName: item.model_name,
     errorMessage: null,
     nameError: null,
+    makeIdError: null,
   }
 
   toggleAddModal(true)
@@ -78,11 +70,11 @@ function handleDelete(id) {
 
 function confirmDelete(confirm) {
   if (confirm) {
-    deleteInsuranceCase(deleteId.value).then(re => {
+    deleteCarModel(deleteId.value).then(re => {
       showConfirmModal.value = false
 
       if (re.status === 'success')
-        updateCaseList(null, 'delete')
+        carModelList.value = re.data
     }).catch(e => {
       showConfirmModal.value = false
     })
@@ -97,14 +89,14 @@ function confirmDelete(confirm) {
 </script>
 
 <template>
-  <Head title="Insurance Cases">
-    <title>Insurance Cases</title>
+  <Head title="Models">
+    <title>Models</title>
   </Head>
 
   <AuthenticatedLayout>
     <template #header>
       <h2 :class="[pageHeader]">
-        Insurance Cases
+        Models
       </h2>
     </template>
 
@@ -116,7 +108,8 @@ function confirmDelete(confirm) {
               class="gap-x-1"
               @click="setFormData({
                 id: null,
-                name: null,
+                model_name: null,
+                car_make: null,
               })"
             >
               <CustomPlus />
@@ -130,26 +123,17 @@ function confirmDelete(confirm) {
                   No
                 </th>
                 <th :class="[tableCol]">
-                  Case
-                </th>
-                <th :class="[tableCol]">
-                  Makes
+                  Make
                 </th>
                 <th :class="[tableCol]">
                   Model
                 </th>
-                <th :class="[tableCol]">
-                  Mileage
-                </th>
-                <th :class="[tableCol]">
-                  Buying Date
-                </th>
                 <th :class="[tableCol]" />
               </tr>
             </thead>
-            <tbody v-if="insuranceCaseList">
+            <tbody v-if="carModelList">
               <template
-                v-for="(insurance, m) in insuranceCaseList"
+                v-for="(carModel, m) in carModelList"
                 :key="m"
               >
                 <tr>
@@ -157,26 +141,17 @@ function confirmDelete(confirm) {
                     {{ m + 1 }}
                   </td>
                   <td :class="[tableCol]">
-                    {{ insurance.case }}
+                    {{ carModel.car_make.name }}
                   </td>
                   <td :class="[tableCol]">
-                    {{ insurance.make_name }}
-                  </td>
-                  <td :class="[tableCol]">
-                    {{ insurance.models_name }}
-                  </td>
-                  <td :class="[tableCol]">
-                    {{ insurance.mileage }}
-                  </td>
-                  <td :class="[tableCol]">
-                    {{ insurance.bought_at }}
+                    {{ carModel.model_name }}
                   </td>
                   <td :class="[tableCol]">
                     <div class="flex items-center gap-x-2">
-                      <ButtonEdit @click="setFormData(insurance)">
+                      <ButtonEdit @click="setFormData(carModel)">
                         Edit
                       </ButtonEdit>
-                      <ButtonDelete @click="handleDelete(insurance.id)">
+                      <ButtonDelete @click="handleDelete(carModel.id)">
                         Delete
                       </ButtonDelete>
                     </div>
@@ -188,17 +163,18 @@ function confirmDelete(confirm) {
         </div>
       </div>
     </div>
-    <EditMake
+    <EditModel
       v-model:show-add-modal="showAddModal"
       v-model:form="form"
       :platform="platformName"
+      :makes-list="makes"
       @close="toggleAddModal"
-      @update="updateCaseList"
+      @update="setCarModelList"
     />
     <ConfirmPopup
       v-model:show-confirm-popup="showConfirmModal"
       :platform="platformName"
-      message="This action will remove data permanently from our database. Are you certain you want to proceed with this deletion?"
+      message="This action will result in the removal of all associated Insurance Cases data. Are you certain you want to proceed with this deletion?"
       @confirm="confirmDelete"
     />
   </AuthenticatedLayout>

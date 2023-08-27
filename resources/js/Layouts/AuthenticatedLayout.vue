@@ -20,7 +20,7 @@ const showingNavigationDropdown = ref(false)
             <div class="flex">
               <!-- Logo -->
               <div class="shrink-0 flex items-center">
-                <Link :href="route('dashboard')">
+                <Link :href="route('insurance-cases')">
                   <ApplicationLogo
                     class="block h-9 w-auto fill-current text-gray-800"
                   />
@@ -30,10 +30,24 @@ const showingNavigationDropdown = ref(false)
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <NavLink
-                  :href="route('dashboard')"
-                  :active="route().current('dashboard')"
+                  :href="route('insurance-cases')"
+                  :active="route().current('insurance-cases')"
                 >
-                  Dashboard
+                  Insurance Cases
+                </NavLink>
+
+                <NavLink
+                  :href="route('car-makes')"
+                  :active="route().current('car-makes')"
+                >
+                  Makes
+                </NavLink>
+
+                <NavLink
+                  :href="route('car-models')"
+                  :active="route().current('car-models')"
+                >
+                  Models
                 </NavLink>
               </div>
             </div>
@@ -70,7 +84,10 @@ const showingNavigationDropdown = ref(false)
                   </template>
 
                   <template #content>
-                    <DropdownLink :href="route('profile.edit')">
+                    <DropdownLink
+                      :href="route('profile.edit')"
+                      :active="route().current('profile.edit')"
+                    >
                       Profile
                     </DropdownLink>
                     <DropdownLink
@@ -130,10 +147,22 @@ const showingNavigationDropdown = ref(false)
         >
           <div class="pt-2 pb-3 space-y-1">
             <ResponsiveNavLink
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              :href="route('insurance-cases')"
+              :active="route().current('insurance-cases')"
             >
-              Dashboard
+              Insurance Cases
+            </ResponsiveNavLink>
+            <ResponsiveNavLink
+              :href="route('car-makes')"
+              :active="route().current('car-makes')"
+            >
+              Makes
+            </ResponsiveNavLink>
+            <ResponsiveNavLink
+              :href="route('car-models')"
+              :active="route().current('car-models')"
+            >
+              Models
             </ResponsiveNavLink>
           </div>
 

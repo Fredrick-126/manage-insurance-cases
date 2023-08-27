@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class CarModel extends Model
+class InsuranceCase extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['car_make_id', 'model_name'];
+    protected $fillable = [
+        'case', 'car_make_id', 'car_model_id', 'mileage', 'bought_at', 'color', 'drivetrain', 'picture_name'
+    ];
 
     /**
-     * Car Make
+     * Car make relationship
+     *
      * @return BelongsTo
      */
     public function carMake(): BelongsTo
@@ -23,12 +25,12 @@ class CarModel extends Model
     }
 
     /**
-     * Insurance Cases
+     * Car model relationship
      *
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function insuranceCases(): HasMany
+    public function carModel(): BelongsTo
     {
-        return $this->hasMany(InsuranceCase::class);
+        return $this->belongsTo(CarModel::class);
     }
 }

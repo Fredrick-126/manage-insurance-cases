@@ -5,25 +5,30 @@ This project based Laravel framework 10.x, so suggest to read [Laravel Document]
 before starting installation.
 
 ### Clone project from git
-- `git clone https://github.com/webdev103/insurance-cases-manage.git`
+- `> git clone https://github.com/webdev103/insurance-cases-manage.git`
 
 ### Install packages
-- `cd insurance-cases-manage`
-- `composer install`
-- `npm install`
+- `> cd insurance-cases-manage`
+- `> composer install`
+- `> npm install`
 
 ### Configuration .env file
 Make the `.env` file if not exists and then edit environment variables in the `.env` file 
-- `cp .env.example .env`
+- `> cp .env.example .env`
 
 ### Database migration
 Before doing migration, DB should be created first in the mysql. 
+- `> mysql -u username -p password`
+- `mysql > create database manage_insurance_cases;`
 #### After creating DB, execute php artisan commands:
-- `php artisan db:migrate`
-- `php artisan db:seed`
+- `> php artisan db:migrate`
+- `> php artisan db:seed`
+
+### Storage link
+- `php artisan storage:link`
 
 ### Front end develop
-- `npm run watch`
+- `> npm run watch`
 
 ### Front end build
-- `npm run build`
+- `> npm run build`
