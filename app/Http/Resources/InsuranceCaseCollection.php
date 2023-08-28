@@ -30,11 +30,9 @@ class InsuranceCaseCollection extends ResourceCollection
                 'mileage'      => number_format($el->mileage),
                 'created_at'   => $el->created_at,
                 'make_id'      => $el->car_make_id,
-                'make_name'    => $el->carMake->name,
                 'model_id'     => $el->car_model_id,
-                'models_name'  => $el->carModel->model_name,
-                'car_make'     => $el->carMake,
-                'car_model'    => $el->carModel,
+                'car_make'     => $el->carMake ?? null,
+                'car_model'    => $el->carModel ?? null,
             ])
         ];
     }

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Contracts\IInsuranceCase;
 use App\Models\CarMake;
 use App\Models\InsuranceCase;
+use Illuminate\Support\Facades\Storage;
 
 class InsuranceCaseRepository extends Repository implements IInsuranceCase
 {
@@ -95,6 +96,10 @@ class InsuranceCaseRepository extends Repository implements IInsuranceCase
             $data['bought_at'] = date('Y-m-d');
         }
 
+        if (!empty($data['picture_image']) && !empty($data['picture_name'])) {
+            $this->uploadPicture($data['picture_image'], $data['picture_name']);
+        }
+
         $insuranceCase->fill($data);
 
         $insuranceCase->user_id = auth()->user()->id;
@@ -118,5 +123,36 @@ class InsuranceCaseRepository extends Repository implements IInsuranceCase
             }])
             ->orderBy('id')
             ->get();
+    }
+
+    /**
+     * Decode base64
+     *
+     * @param $base64File
+     * @return bool|string
+     */
+    private function decodeAndGetFile($base64File): bool|string
+    {
+        $replace = substr($base64File, 0, strpos($base64File, ',') + 1);
+        $fileStr = str_replace($replace, '', $base64File);
+        $fileStr = str_replace(' ', '+', $fileStr);
+
+        return base64_decode($fileStr);
+    }
+
+    /**
+     * Upload picture
+     *
+     * @param $base64File
+     * @param $fileName
+     * @return void
+     */
+    private function uploadPicture($base64File, $fileName): void
+    {
+        $content = $this->decodeAndGetFile($base64File);
+
+        $userID = auth()->user()->id;
+        $path = 'public/' . config('services.site.picture_folder') . "/$userID/$fileName";
+        Storage::disk('local')->put($path, $content);
     }
 }

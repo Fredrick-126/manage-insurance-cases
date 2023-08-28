@@ -6,7 +6,7 @@ import {
   SmallHeader,
   TopToBottom,
   useStyledContainers,
-} from './inports'
+} from './imports'
 
 const { platform, message, showConfirmPopup } = defineProps([
   'platform',

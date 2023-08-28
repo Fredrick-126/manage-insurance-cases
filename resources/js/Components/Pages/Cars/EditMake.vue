@@ -12,7 +12,7 @@ import {
   TopToBottom,
   useStyledContainers,
   useStyledControls,
-} from './inports'
+} from './imports'
 import { addCarMake, updateCarMake } from '@/Actions'
 
 const { form, platform, showAddModal } = defineProps([

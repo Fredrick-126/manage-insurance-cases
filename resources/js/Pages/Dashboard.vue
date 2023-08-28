@@ -9,10 +9,12 @@ import { ButtonDelete, ButtonEdit, ButtonNext } from '@/Components/Buttons'
 import { ConfirmPopup, EditInsuranceCase } from '@/Components/Pages'
 import { deleteInsuranceCase } from '@/Actions'
 
-const { cars, data, errors } = defineProps([
+const { cars, data, enableDrivetrain, errors, maxMileage } = defineProps([
   'cars',
   'data',
+  'enableDrivetrain',
   'errors',
+  'maxMileage',
 ])
 
 const {
@@ -75,7 +77,9 @@ function setFormData(item) {
     case: item.case,
     car_make: item.car_make,
     car_model: item.car_model,
-    mileage: item.mileage,
+    mileage: item.mileage
+      ? (isNaN(item.mileage) ? parseInt(item.mileage.includes(',') ? item.mileage.replace(',', '') : item.mileage) : item.mileage)
+      : 0,
     boughtAt: item.bought_at,
     color: item.color,
     drivetrain: item.drivetrain,
@@ -165,9 +169,6 @@ function confirmDelete(confirm) {
                 <th :class="[tableCol]">
                   Buying Date
                 </th>
-                <th :class="[tableCol]">
-                  Status
-                </th>
                 <th :class="[tableCol]" />
               </tr>
             </thead>
@@ -204,9 +205,6 @@ function confirmDelete(confirm) {
                     {{ insurance.bought_at }}
                   </td>
                   <td :class="[tableCol]">
-                    {{ insurance.status }}
-                  </td>
-                  <td :class="[tableCol]">
                     <div class="flex items-center gap-x-2">
                       <ButtonEdit @click="setFormData(insurance)">
                         Edit
@@ -236,6 +234,8 @@ function confirmDelete(confirm) {
           v-model:show-edit-page="showEditPage"
           v-model:form="form"
           :cars="cars"
+          :enable-drivetrain="enableDrivetrain"
+          :max-mileage="maxMileage"
           :platform="platformName"
           @close="showEditModal"
           @update="updateCaseList"

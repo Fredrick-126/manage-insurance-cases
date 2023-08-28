@@ -9,7 +9,7 @@ function handleBack() {
 </script>
 
 <template>
-  <div class="mb-4">
+  <div>
     <button
       class="p-1 m-0 border-0 bg-transparent"
       type="button"

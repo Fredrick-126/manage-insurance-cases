@@ -1,5 +1,6 @@
 import {
   ButtonContinue,
+  ButtonDelete,
   ButtonHoverWide,
   ButtonNext,
   GoBack,
@@ -19,19 +20,22 @@ import { DefaultMessage, ErrorLabel } from '@/Components/Messages'
 
 import { ModalTop } from '@/Components/Modals'
 
-import { BottomToTop, FadeInOut, TopToBottom } from '@/Components/Transitions'
+import { BottomToTop, DynamicEnter, FadeInOut, TopToBottom } from '@/Components/Transitions'
 
 import useStyledContainers from '@/Hooks/TailwindClasses/containers'
 import useStyledControls from '@/Hooks/TailwindClasses/controls'
 
 export {
+  BottomToTop,
   ButtonContinue,
+  ButtonDelete,
   ButtonHoverWide,
   ButtonNext,
   Card,
   ControlLabel,
   CustomButtonLoading,
   DefaultMessage,
+  DynamicEnter,
   ErrorLabel,
   FadeInOut,
   FormGroupLabel,
@@ -43,7 +47,6 @@ export {
   StandardLabel,
   StandardMobileLabel,
   TopToBottom,
-  BottomToTop,
   useStyledContainers,
   useStyledControls,
 }
