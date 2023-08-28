@@ -7,6 +7,7 @@ use App\Http\Resources\InsuranceCaseCollection;
 use App\Models\InsuranceCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -86,6 +87,16 @@ class InsuranceCaseController extends Controller
      */
     public function destroy(InsuranceCase $insuranceCase): JsonResponse
     {
+        $picture = $insuranceCase->picture_name;
+        if (!empty($picture)) {
+            // Delete picture from storage if exists
+            $userId = auth()->user()->id;
+            $path = 'public/' . config('services.site.picture_folder') . "/$userId/$picture";
+            if (Storage::disk('local')->exists($path)) {
+                Storage::disk('local')->delete($path);
+            }
+        }
+
         $insuranceCase->delete();
 
         return response()->json([
